@@ -2,32 +2,13 @@
 session_start();
 
 if(isset($_SESSION['usr_id'])  && isset($_SESSION['email'])) {
-	header("Location: home.php");
-}
-
-include_once 'dbconnect.php';
-
-//set validation error flag as false
-$error = false;
-
-//check if form is submitted
-if (isset($_POST['submit'])) {
-	$name = mysqli_real_escape_string($con, $_POST['name']);
-	$userId=$_SESSION['usr_id'];
-	$email = mysqli_real_escape_string($con, $_POST['email']);
-	$Address = mysqli_real_escape_string($con, $_POST['Address']);
-	$Phone = mysqli_real_escape_string($con, $_POST['Phone']);
 	
-  
-	if (!$error) {
-		if(mysqli_query($con, "INSERT INTO userInfo (userID,name,email,Address,Phone) VALUES('" . $userId . "','" . $name . "', '" . $email . "', '" . $Address . "', '" . $Phone. "')")) {
-			$successmsg = "Successfully Data are added!";
-		} else {
-			$errormsg = "Error in added...Please try again later!";
-		}
-	}
+	header("Location: home.php");
+
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -35,11 +16,13 @@ if (isset($_POST['submit'])) {
 	<title>Phone Book</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" >
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+	<link href='img/pb1.png' rel='icon' type='image/x-icon'/>
 
 	<style>
 	body  {
-	    background-image: url("img/head1.jpg");
+	    background-image: url("img/4.jpg");
 	    background-color: #cccccc;
+	    color:white;
 	}
 	</style>
 
@@ -78,19 +61,103 @@ if (isset($_POST['submit'])) {
 
 
 <center> 
- <legend><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
+ <legend style="color:white;"><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
 </center>
- 
- 
+<span class="text-success"><?php if (isset($successmsg)) { echo $successmsg; } ?></span>
+<span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
+  
 
-   <h1>Edit data</h1>
- 
+  <center> <h1>Edit Your data</h1></center> 
 
- 
+          <div class="container">
 
+            <div class="row">
+
+            <table class="table table-bordered ">
+        <thead>
+          <tr>
+              <th class="text-center">Id</th>
+              <th class="text-center">Name</th>
+              <th class="text-center">Address</th>
+              <th class="text-center">Email</th>
+              <th class="text-center">Mobile</th>
+              <th class="text-center">Option</th>
+          </tr>
+ 
+		  
+		  <?php
+ 			include_once 'dbconnect.php';
+ 
+		 	mysql_connect("localhost","root","");
+			mysql_select_db("tst123");
+
+            $userid=$_SESSION['usr_id'];
+ 	
+			
+	
+		  
+		  $query=mysql_query("SELECT * FROM userinfo WHERE userID=$userid");
+
+			if($query === FALSE) { 
+				die(mysql_error()); // TODO: better error handling
+			}
+
+		   while($arr=mysql_fetch_array($query)) {
+
+
+		   ?>
+        </thead>
+        <tbody>
+          <tr>
+
+              <td class="text-center"><?php echo $arr[1];?></td>
+              <td class="text-center"><?php echo $arr[2];?></td>
+              <td class="text-center"><?php echo $arr[3];?></td>
+              <td class="text-center"><?php echo $arr[4];?></td>
+              <td class="text-center"><?php echo $arr[5];?></td>
+              <td><center>
+            <?php
+             
+            
+             echo "<a class='btn btn-info' href=\"viewedit.php?id=".$arr['id']."\" ><span class='glyphicon glyphicon-trash'></span>Edit</a>"; ?>
+             &nbsp;&nbsp;
+             
+          </tr>
+
+          <?php
+			}
+		?>
+        </tbody>
+      </table>
+
+
+
+            </div>
+
+        </div>
+
+        <br>
+ 
+         <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+
+            <div class="container">
+                <div class="navbar-text pull-left">
+                    <p> <span class="glyphicon glyphicon-globe"></span> 2017 We Are "One"</p>
+                </div>
+                <div class="navbar-text pull-right">
+                    <a href="#"><i class="fa fa-facebook-square fa-2x icon-padding"></i></a>
+                    <a href="#"><i class="fa fa-twitter fa-2x icon-padding"></i></a>
+                    <a href="#"><i class="fa fa-google-plus fa-2x icon-padding"></i></a>
+					
+                </div>
+            </div>
+
+        </div>
+
+		
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
 
-
+ 

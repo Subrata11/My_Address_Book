@@ -69,6 +69,9 @@ if (isset($_POST['submit'])) {
 				<li><a href="view.php"> <span class="glyphicon glyphicon-eye-open"></span>  View</a></li>
 				<li><a href="delete.php"> <span class="glyphicon glyphicon-remove"></span>  Delete</a></li>
 				<li><a href="search.php"> <span class="glyphicon glyphicon-search"></span>  Search</a></li>
+				<li><a href="profile.php"> <span class="glyphicon glyphicon-search"></span>  Profile</a></li>
+        
+            
 				<li><p class="navbar-text">Hi! <span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['usr_name']; ?></p></li>
 				<li><a href="logout.php"> <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
 				<?php } else { ?>
@@ -82,58 +85,11 @@ if (isset($_POST['submit'])) {
 
 
 <center> 
- <legend><h3>Welcome "<?php echo $_SESSION['usr_name']; ?>" to Online Address Book</h3><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
+ <legend><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
 </center>
  
  
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4 well">
-			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="signupform">
-				<fieldset>
-					<legend>
-					<center>Add Data.</legend></center>
-
-					<div class="form-group">
-						<label for="name">Name:</label>
-						<input type="text" name="name" placeholder="Enter Full Name" required value="<?php if($error) echo $name; ?>" class="form-control" />
-<!-- 						<span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
- -->					</div>
-					
-					<div class="form-group">
-						<label for="name">Email:</label>
-						<input type="text" name="email" placeholder="Email" required value="<?php if($error) echo $email; ?>" class="form-control" />
-						<span class="text-danger"><?php if (isset($email_error)) echo $email_error; ?></span>
-					</div>
-
-					<div class="form-group">
-						<label for="name">Address:</label>
-						<input type="text" name="Address" placeholder="Address" required class="form-control" />
-<!-- 						<span class="text-danger"><?php if (isset($password_error)) echo $password_error; ?></span>
- -->					</div>
-
-					<div class="form-group">
-						<label for="name">Phone Number:</label>
-						<input type="text" name="Phone" placeholder="Phone" required class="form-control" />
-						<span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
-					</div>
-
-					<div class="form-group">
-						<input type="submit" name="submit" value="Add data" class="btn btn-primary" />
-					</div>
-				</fieldset>
-			</form>
-			<span class="text-success"><?php if (isset($successmsg)) { echo $successmsg; } ?></span>
-			<span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4 text-center">	
-<!-- 		Already Registered? <a href="login.php">Login Here</a>
- -->		</div>
-	</div>
-</div>
+ 
 	
 	</BR>
 	</BR>

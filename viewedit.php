@@ -1,5 +1,6 @@
 <?php
 session_start();
+ 
 
 if(isset($_SESSION['usr_id'])  && isset($_SESSION['email'])) {
 	header("Location: home.php");
@@ -9,26 +10,9 @@ include_once 'dbconnect.php';
 
 //set validation error flag as false
 $error = false;
+ $ID=$_GET['id'];
+ 
 
-//check if form is submitted
-if (isset($_POST['submit'])) {
-	$name = mysqli_real_escape_string($con, $_POST['name']);
-	$userId=$_SESSION['usr_id'];
-	$email = mysqli_real_escape_string($con, $_POST['email']);
-	$Address = mysqli_real_escape_string($con, $_POST['Address']);
-	$Phone = mysqli_real_escape_string($con, $_POST['Phone']);
-	
-  
-	if (!$error) {
-		if(mysqli_query($con, "INSERT INTO userInfo (userID,name,email,Address,Phone) VALUES('" . $userId . "','" . $name . "', '" . $email . "', '" . $Address . "', '" . $Phone. "')")) 
-		{
-			$successmsg = "Successfully Data are added!";
-		} 
-		else {
-			$errormsg = "Error in added...Please try again later!";
-		}
-	}
-}
 ?>
 
 <!DOCTYPE html>
@@ -37,12 +21,10 @@ if (isset($_POST['submit'])) {
 	<title>Phone Book</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" >
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-	<link href='img/pb1.png' rel='icon' type='image/x-icon'/>
-	
-	
+    <link href='img/pb1.png' rel='icon' type='image/x-icon'/>
 	<style>
 	body  {
-	    background-image: url("img/1.jpg");
+	    background-image: url("img/4.jpg");
 	    background-color: #cccccc;
 	}
 	</style>
@@ -59,7 +41,7 @@ if (isset($_POST['submit'])) {
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="home.php"><span class="glyphicon glyphicon-folder-open"></span>   Manage Your Phonebook</a>
+			<a class="navbar-brand" href="index.php"><span class="glyphicon glyphicon-folder-open"></span>   Manage Your Phonebook</a>
 		</div>
 		<div class="collapse navbar-collapse" id="navbar1">
 			<ul class="nav navbar-nav navbar-right">
@@ -82,45 +64,68 @@ if (isset($_POST['submit'])) {
 
 
 <center> 
- <legend><h3>Welcome "<?php echo $_SESSION['usr_name']; ?>" to Online Address Book</h3><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
+ <legend><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
 </center>
  
  
 
-<div class="container">
+   <h1>Edit data</h1>
+
+     <div class="container">
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4 well">
-			<form role="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="signupform">
+			<form role="form" action="edited.php?id=<?php echo $ID;?>" method="post" name="signupform">
 				<fieldset>
 					<legend>
-					<center>Add Data.</legend></center>
+					<center>Edit Data.</legend></center>
+                <input type="hidden" name="name" placeholder="ID" required value="<?php echo $ID;?>" class="form-control" />
 
+                  <?php
+                  include_once 'dbconnect.php';
+ 
+		 	      mysql_connect("localhost","root","");
+			      mysql_select_db("tst123");
+
+                 $ID=$_GET['id'];
+					
+				 $row=mysql_query("SELECT * FROM userinfo WHERE id=$ID");
+
+                   if($row === FALSE) { 
+				die(mysql_error()); // TODO: better error handling
+			}
+
+		   while($data=mysql_fetch_array($row)) {
+
+		   	?>
+
+
+              
 					<div class="form-group">
 						<label for="name">Name:</label>
-						<input type="text" name="name" placeholder="Enter Full Name" required value="<?php if($error) echo $name; ?>" class="form-control" />
+						<input type="text" name="name" placeholder="Enter Full Name" required value="<?php echo  $data['name'];?>" class="form-control" />
 <!-- 						<span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
  -->					</div>
 					
 					<div class="form-group">
 						<label for="name">Email:</label>
-						<input type="text" name="email" placeholder="Email" required value="<?php if($error) echo $email; ?>" class="form-control" />
-						<span class="text-danger"><?php if (isset($email_error)) echo $email_error; ?></span>
+						<input type="text" name="email" placeholder="Email" required value=<?php echo  $data['email'];?>" class="form-control" />
+						<!-- <span class="text-danger"><?php if (isset($email_error)) echo $email_error; ?></span> -->
 					</div>
 
 					<div class="form-group">
 						<label for="name">Address:</label>
-						<input type="text" name="Address" placeholder="Address" required class="form-control" />
+						<input type="text" name="Address" placeholder="Address" required class="form-control" value="<?php echo  $data['Address'];?>" />
 <!-- 						<span class="text-danger"><?php if (isset($password_error)) echo $password_error; ?></span>
  -->					</div>
 
 					<div class="form-group">
 						<label for="name">Phone Number:</label>
-						<input type="text" name="Phone" placeholder="Phone" required class="form-control" />
-						<span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
+						<input type="text" name="Phone" placeholder="Phone" required class="form-control" value="<?php echo  $data['Phone'];?>" />
+						<!-- <span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span> -->
 					</div>
 
 					<div class="form-group">
-						<input type="submit" name="submit" value="Add data" class="btn btn-primary" />
+						<input type="submit" name="submit" value="Update" class="btn btn-primary" />
 					</div>
 				</fieldset>
 			</form>
@@ -134,13 +139,14 @@ if (isset($_POST['submit'])) {
  -->		</div>
 	</div>
 </div>
-	
-	</BR>
-	</BR>
-	</BR>
-	</BR>
-	</BR>
-	</BR>
+
+
+
+
+
+
+
+
 
          <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
 
@@ -157,11 +163,12 @@ if (isset($_POST['submit'])) {
             </div>
 
         </div>
- 
 
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
-
+<?php
+}
+?>
 

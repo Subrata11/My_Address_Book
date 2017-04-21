@@ -50,7 +50,9 @@ if (isset($_POST['signup'])) {
 	<title>User Registration Script</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" >
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-
+	<link href='img/pb1.png' rel='icon' type='image/x-icon'/>
+	
+	
 	<style>
 	body  {
 	    background-image: url("img/2.jpg");
@@ -76,8 +78,9 @@ if (isset($_POST['signup'])) {
 		<!-- menu items -->
 		<div class="collapse navbar-collapse" id="navbar1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="login.php"><span class="glyphicon glyphicon-log-in"> Login</a></li>
-				<li class="active"><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span>  Contact Us</a></li>
 			</ul>
 		</div>
 	</div>
@@ -131,6 +134,26 @@ if (isset($_POST['signup'])) {
 	</div>
 </div>
 
+
+
+
+
+
+         <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+
+            <div class="container">
+                <div class="navbar-text pull-left">
+                    <p> <span class="glyphicon glyphicon-globe"></span> 2017 We Are "One"</p>
+                </div>
+                <div class="navbar-text pull-right">
+                    <a href="#"><i class="fa fa-facebook-square fa-2x icon-padding"></i></a>
+                    <a href="#"><i class="fa fa-twitter fa-2x icon-padding"></i></a>
+                    <a href="#"><i class="fa fa-google-plus fa-2x icon-padding"></i></a>
+					
+                </div>
+            </div>
+
+        </div>
 
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>

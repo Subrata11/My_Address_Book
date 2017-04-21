@@ -26,7 +26,7 @@ include_once 'dbconnect.php';
 	
 		<style>
 	body  {
-	    background-image: url("img/.jpg");
+	    background-image: url("img/4.jpg");
 	    background-color: #cccccc;
 	}
 	</style>
@@ -54,38 +54,46 @@ include_once 'dbconnect.php';
 				<?php } else { ?>
 				<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				<li><a href="register.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span>  Contact Us</a></li>
+				<li><a href="register.php"><span class="glyphicon glyphicon-envelope"></span>  Contact Us</a></li>
 				<?php } ?>
 			</ul>
 		</div>
 	</div>
 </nav>
+
  
-<center> 
- <legend><h3><strong>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</strong></h3></legend>
-</center>
-
-
-<center> 
-<legend>
- <a href="#hero"><img src="img/phonebook-icon.png" alt="" title="" /></img></a>
-</legend>
-</center>
  
- <legend><p><font face="verdana" color=""><h4>
-PHP Address Book is a simple, easy to use web based address and phone book that is based on PHP and MySQL database. The open source software is released under the GNU GPL license. The script allows the users to search, edit, add, and delete address entries from the web browser. The PHP Address Book allows each of the users to have their own login usernames. The PHP address book asks for details like first name, last name, business name, designation, address. Contact details like telephone number,fax number, cell number, email address, postal address, city, zip code etc. Customer list and details in the form of client name, address, contact numbers and personal information like birthdays, anniversaries and home address and contact details. PHP address book offers features like: </br></br>
-1.	Easy and manageable contact and group information </br></br>
-2.	Allows easy export of Excel, vCard-import card, </br></br>
-3.	Displays geographical maps of groups </br></br>
-4.	Detects and displays in over 12 languages </br></br>
-5.	Displays upcoming birthdays of the contacts </br></br>
-6.	It is optimized and supports ActiveSync for iPhones and Android users </br></br>
-7.	Shows birthdays in iPhone calendar </br></br>
-8.	Authenticates user access with user id and password and IP address.</br></br></br></br></br></br>
 
-</font></p> </legend>
+<!--==========================
+  Contact Section
+============================--> 
 
 
+  <section id="contact">
+    <div class="container wow fadeInUp">
+      <div class="row">
+        <div class="col-md-12">
+           <center><h2 class="section-title">Contact With Me</h2> </center>
+		  <button type="button" class="btn btn-primary btn-lg btn-block"></button> 
+          <div class="section-title-divider"></div>
+      
+        </div>
+		</br>
+		</br>
+		</br>
+		</br>
+		</br>
+      </div>
+	  
+	  
+  
+			<font>
+					<h1>
+						<center>Thanks for your Response.</center>
+					</h1>
+			</font>
+
+ 
         <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
 
             <div class="container">
@@ -101,9 +109,6 @@ PHP Address Book is a simple, easy to use web based address and phone book that 
             </div>
 
         </div>
-
- 
-
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>

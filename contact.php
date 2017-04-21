@@ -26,7 +26,7 @@ include_once 'dbconnect.php';
 	
 		<style>
 	body  {
-	    background-image: url("img/.jpg");
+	    background-image: url("img/4.jpg");
 	    background-color: #cccccc;
 	}
 	</style>
@@ -60,33 +60,85 @@ include_once 'dbconnect.php';
 		</div>
 	</div>
 </nav>
+
  
-<center> 
- <legend><h3><strong>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</strong></h3></legend>
-</center>
-
-
-<center> 
-<legend>
- <a href="#hero"><img src="img/phonebook-icon.png" alt="" title="" /></img></a>
-</legend>
-</center>
  
- <legend><p><font face="verdana" color=""><h4>
-PHP Address Book is a simple, easy to use web based address and phone book that is based on PHP and MySQL database. The open source software is released under the GNU GPL license. The script allows the users to search, edit, add, and delete address entries from the web browser. The PHP Address Book allows each of the users to have their own login usernames. The PHP address book asks for details like first name, last name, business name, designation, address. Contact details like telephone number,fax number, cell number, email address, postal address, city, zip code etc. Customer list and details in the form of client name, address, contact numbers and personal information like birthdays, anniversaries and home address and contact details. PHP address book offers features like: </br></br>
-1.	Easy and manageable contact and group information </br></br>
-2.	Allows easy export of Excel, vCard-import card, </br></br>
-3.	Displays geographical maps of groups </br></br>
-4.	Detects and displays in over 12 languages </br></br>
-5.	Displays upcoming birthdays of the contacts </br></br>
-6.	It is optimized and supports ActiveSync for iPhones and Android users </br></br>
-7.	Shows birthdays in iPhone calendar </br></br>
-8.	Authenticates user access with user id and password and IP address.</br></br></br></br></br></br>
 
-</font></p> </legend>
+<!--==========================
+  Contact Section
+============================--> 
+  <section id="contact">
+    <div class="container wow fadeInUp">
+      <div class="row">
+        <div class="col-md-12">
+           <center><h2 class="section-title">Contact With Me</h2> </center>
+		  <button type="button" class="btn btn-primary btn-lg btn-block"></button> 
+          <div class="section-title-divider"></div>
+      
+        </div>
+		</br>
+		</br>
+		</br>
+		</br>
+		</br>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3 col-md-push-2">
+          <div class="info">
+            <div>
+             
+              <span class="glyphicon glyphicon-user"></span><p>Binodpur<br>Rajshahi,Bangladesh.</p>
+            </div>
+			
+             <div>
+                <span class="glyphicon glyphicon-envelope"></span><p>sksubrata96@gmail.com</p>
+            </div>
+            
+            <div>
+               <span class="glyphicon glyphicon-earphone"></span><p>+8801738061325</p>
+            </div>
+            
+          </div>
+        </div>
+        
+        <div class="col-md-5 col-md-push-2">
+          <div class="form">
+ 			
+            <div id="errormessage">
+ 
+			</div>
+            <form action="welcome.php" method="post" role="form" class="contactForm">
+                <div class="form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                  <div class="validation"></div>
+                </div>
+                <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+ 
+  </section>
 
 
-        <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+ 
+ 
+         <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
 
             <div class="container">
                 <div class="navbar-text pull-left">
@@ -101,8 +153,6 @@ PHP Address Book is a simple, easy to use web based address and phone book that 
             </div>
 
         </div>
-
- 
 
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>

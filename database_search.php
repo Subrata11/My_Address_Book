@@ -4,6 +4,7 @@ session_start();
 if(isset($_SESSION['usr_id'])  && isset($_SESSION['email'])) {
   
   header("Location: home.php");
+  $id=$_SESSION['usr_id'];
 
 }
 
@@ -13,18 +14,19 @@ if(isset($_SESSION['usr_id'])  && isset($_SESSION['email'])) {
 
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Phone Book</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport" >
   <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-   <link href='img/pb1.png' rel='icon' type='image/x-icon'/>
+  <link href='img/pb1.png' rel='icon' type='image/x-icon'/>
+
   <style>
   body  {
       background-image: url("img/4.jpg");
-      background-color: #cccccc;
+      background-color: #000;
+      
   }
   </style>
 
@@ -60,91 +62,64 @@ if(isset($_SESSION['usr_id'])  && isset($_SESSION['email'])) {
     </div>
   </div>
 </nav>
-
-
 <center> 
- <legend><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
+ <legend ><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
 </center>
 <span class="text-success"><?php if (isset($successmsg)) { echo $successmsg; } ?></span>
 <span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
   
     
-  <h1>view data</h1>
- 
-<a href="export.php" class="btn btn-success" target="_blank">Download employee data</a>
-
+  <h1>Search data</h1>
 
           <div class="container">
 
             <div class="row">
-              
-               
-            <br><br>
-            <table id="myTable" class="table table-bordered ">
-        <thead>
-          <tr class="header">
-              <th class="text-center">Id</th>
-              <th class="text-center">Name</th>
-              <th class="text-center">Address</th>
-              <th class="text-center">Email</th>
-            <th class="text-center">Mobile</th>
-              <th class="text-center">Option</th>
-          </tr>
+
+
+
+<?php 
+//load database connection
+    $host = "localhost";
+    $user = "root";
+    $password = "";
+    $database_name = "tst123";
+
+    $pdo = new PDO("mysql:host=$host;dbname=$database_name", $user, $password, array(
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ));
+// Search from MySQL database table
+$search=$_POST['search'];
+$query = $pdo->prepare("select * from userinfo where  name LIKE '%$search%' OR email LIKE '%$search%' OR Address LIKE '%$search%' OR Phone  LIKE '%$search%' LIMIT 0 , 10");
+$query->bindValue(1, "%$search%", PDO::PARAM_STR);
+$query->execute();
+// Display search result
+         if (!$query->rowCount() == 0) {
  
-      
-      <?php
-      include_once 'dbconnect.php';
+				echo "<table style='color:white;' class='table table-bordered '>";	
+                echo "<tr><td >User Name</td><td >Email</td><td >Address</td><td >Phone</td></tr>";				
+            while ($results = $query->fetch()) {
  
-      mysql_connect("localhost","root","");
-      mysql_select_db("tst123");
-
-      $userid=$_SESSION['usr_id'];
- 
-      $query=mysql_query("SELECT * FROM userinfo WHERE userID=$userid");
-
-      if($query === FALSE) { 
-        die(mysql_error()); // TODO: better error handling
-      }
-
-       while($arr=mysql_fetch_array($query)) {
-
-
-       ?>
-        </thead>
-        <tbody>
-          <tr>
-
-              <td color="white" class="text-center"><?php echo $arr[1];?></td>
-              <td class="text-center"><?php echo $arr[2];?></td>
-              <td class="text-center"><?php echo $arr[3];?></td>
-              <td class="text-center"><?php echo $arr[4];?></td>
-              <td class="text-center"><?php echo $arr[5];?></td>
-              <td><center>
-            <?php
-             
-            
-             echo "<a class='btn btn-info' href=\"viewedit.php?id=".$arr['id']."\" ><span class='glyphicon glyphicon-trash'></span>Edit</a>"; ?>
-             &nbsp;&nbsp;
-             <?php
-
-              echo "<a class='btn btn-danger' href=\"v_deleted.php?id=".$arr['id']."\" ><span class='glyphicon glyphicon-trash'></span>Delete</a>";
-             ?>
-          </tr>
-
-          <?php
-      }
-    ?>
-        </tbody>
-      </table>
+				echo "<tr><td >";			
+                echo $results['name'];
+				echo "</td><td >";
+                echo $results['email'];
+				echo "</td><td >";
+                
+                echo $results['Address'];
+                echo "</td><td >";
+                echo $results['Phone'];
+	 	
+            }
+				echo "</table>";		
+        } else {
+            echo '<h2>Nothing found in the Database.Please try again...<h2>';
+        }
+?>
 
 
 
-            </div>
 
-        </div>
 
-        <br>
- 
          <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
 
             <div class="container">
@@ -161,35 +136,12 @@ if(isset($_SESSION['usr_id'])  && isset($_SESSION['email'])) {
 
         </div>
 
+
+
+
+
+
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-<script>
-function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
-
-  
-
- 

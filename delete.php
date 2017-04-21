@@ -35,11 +35,13 @@ if (isset($_POST['submit'])) {
 	<title>Phone Book</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" >
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-
+	<link href='img/pb1.png' rel='icon' type='image/x-icon'/>
+	
 	<style>
 	body  {
-	    background-image: url("img/1.jpg");
+	    background-image: url("img/4.jpg");
 	    background-color: #cccccc;
+	    color: white;
 	}
 	</style>
 
@@ -78,13 +80,100 @@ if (isset($_POST['submit'])) {
 
 
 <center> 
- <legend><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
+ <legend style="color:white;"><h3>Make your Phone Book</h3><h3>You can Add,Delete,Edit,Search from the database Easily.</h3></legend>
 </center>
  
   <h1>delete data</h1>
+   <div class="container">
+
+            <div class="row">
+
+   <table class="table table-bordered ">
+        <thead>
+          <tr>
+              <th class="text-center">Id</th>
+              <th class="text-center">Name</th>
+              <th class="text-center">Address</th>
+              <th class="text-center">Email</th>
+            <th class="text-center">Mobile</th>
+              <th class="text-center">Option</th>
+          </tr>
+ 
+		  
+		  <?php
+ 			include_once 'dbconnect.php';
+ 
+		 	mysql_connect("localhost","root","");
+			mysql_select_db("tst123");
+
+            $userid=$_SESSION['usr_id'];
+	       // var_dump($userid);
+	
+			
+	
+		  
+		  $query=mysql_query("SELECT * FROM userinfo WHERE userID=$userid");
+
+			if($query === FALSE) { 
+				die(mysql_error()); // TODO: better error handling
+			}
+
+		   while($arr=mysql_fetch_array($query)) {
+
+
+		   ?>
+        </thead>
+        <tbody>
+          <tr>
+
+              <td class="text-center"><?php echo $arr[1];?></td>
+              <td class="text-center"><?php echo $arr[2];?></td>
+              <td class="text-center"><?php echo $arr[3];?></td>
+              <td class="text-center"><?php echo $arr[4];?></td>
+              <td class="text-center"><?php echo $arr[5];?></td>
+              <!-- <td><center>
+             <a href=\"delete.php?id=".$row['id']."\"> class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a></center></td> -->
+             <?php
+
+             echo "<td ><center><a class='btn btn-danger' href=\"deleted.php?id=".$arr['id']."\" ><span class='glyphicon glyphicon-trash'></span>Delete</a></center</td>";
+             ?>
+          </tr>
+
+          <?php
+			}
+		?>
+        </tbody>
+      </table>
+      </div>
+      </div>
  
  
 
+          <div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+
+            <div class="container">
+                <div class="navbar-text pull-left">
+                    <p> <span class="glyphicon glyphicon-globe"></span> 2017 We Are "One"</p>
+                </div>
+                <div class="navbar-text pull-right">
+                    <a href="#"><i class="fa fa-facebook-square fa-2x icon-padding"></i></a>
+                    <a href="#"><i class="fa fa-twitter fa-2x icon-padding"></i></a>
+                    <a href="#"><i class="fa fa-google-plus fa-2x icon-padding"></i></a>
+					
+                </div>
+            </div>
+
+        </div>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 <script src="js/jquery-1.10.2.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
